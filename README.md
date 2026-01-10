@@ -1,9 +1,7 @@
-# instagram-follower-cleaner
+# instagram-followers-cleaner
 A small Python utility to clean Instagram exported text and detect users who do not follow back.
 
-This project was built as part of my learning journey while studying Python fundamentals, with a focus on clean code, text processing, and data cleaning.
-
-This project is intentionally simple and focused on fundamentals.
+This project was built as part of my learning journey while studying Python fundamentals, with a focus on clean code, text processing, and data cleaning. It is intentionally simple and focused on fundamentals.
 It represents an early step in my learning path.
 
 ---
@@ -43,7 +41,7 @@ for user in not_mutual:
     print(user)
 ```
 Output:
-```yaml
+```text
 Users not following back:
 user3
 ```
@@ -54,7 +52,7 @@ user3
 ```bash
 instagram-followers-cleaner/
 │
-├── instagram_cleaner.py   # Core logic
+├── README.md              # Project documentation
 ├── example_usage.py       # Simple usage example
-└── README.md              # Project documentation
+└── instagram_cleaner.py   # Core logic
 ```
