@@ -8,6 +8,7 @@ following_raw = '''
 user1
 user2
 user3
+user4
 '''
 
 followers = clean_input(followers_raw)
