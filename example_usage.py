@@ -7,6 +7,8 @@ some_follower3
 '''
 following_raw = '''
 some_follower1
+some_follower2
+some_follower3
 some_follower4
 some_follower5
 '''
