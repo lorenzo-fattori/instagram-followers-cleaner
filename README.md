@@ -13,6 +13,9 @@ It represents an early step in my learning path.
 - Normalizes usernames (lowercase, stripped)
 - Detects users you follow who do not follow you back
 - Efficient comparison using Python sets
+- Keeps only valid Instagram username-like lines
+- Removes duplicates while preserving input order
+- Deterministic output (sorted result)
 
 ---
 

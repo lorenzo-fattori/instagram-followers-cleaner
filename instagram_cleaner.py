@@ -1,29 +1,44 @@
 import re
-'''
-This script is designed to process the text block exported from Instagram's "Your Account Data" section, 
-specifically the list of followers and following. 
-It extracts only the usernames and identifies which users you follow that do not follow you back.    
-'''
 
-# this function checks if a line from the input text is a valid username, filtering out links, dates, and empty lines.
-def take_username(line):
-    """Return True if the line is a valid username (no link, no data)."""
-    if line.startswith("http"):
-        return False
-    # exludes dates like "dic 04, 2025 3:19 pm"
-    if re.search(r"\d{4}", line):
-        return False
-    if line.strip() == "":
-        return False
-    return True
+"""
+This module processes text exported from Instagram account data.
+It extracts usernames from raw followers/following blocks and finds
+accounts you follow that do not follow you back.
+"""
 
-# this function takes the raw text input, splits it into lines, and applies the take_username filter to extract only valid usernames.
-def clean_input(text):
-    """Extracts only usernames from an exported Instagram text block"""
-    lines = text.splitlines()
-    return [r.strip() for r in lines if take_username(r)]
+_USERNAME_RE = re.compile(r"^[a-zA-Z0-9._]{1,30}$")
 
-# this function compares the list of followers and following to identify which users you follow that do not follow you back.
-def not_following_back(followers, following):
-    """Returns the list of users you follow but don't follow you back."""
-    return {u for u in following if u not in followers}
+
+def take_username(line: str) -> bool:
+    """Return True if the line looks like a valid Instagram username."""
+    candidate = line.strip()
+    if not candidate:
+        return False
+    if candidate.startswith(("http://", "https://", "www.")):
+        return False
+    return _USERNAME_RE.fullmatch(candidate) is not None
+
+
+def clean_input(text: str) -> list[str]:
+    """Extract, normalize, and de-duplicate usernames preserving order."""
+    usernames: list[str] = []
+    seen: set[str] = set()
+
+    for raw_line in text.splitlines():
+        if not take_username(raw_line):
+            continue
+
+        username = raw_line.strip().lower()
+        if username in seen:
+            continue
+
+        usernames.append(username)
+        seen.add(username)
+
+    return usernames
+
+
+def not_following_back(followers: list[str], following: list[str]) -> list[str]:
+    """Return a sorted list of users you follow who do not follow you back."""
+    followers_set = set(followers)
+    return sorted({user for user in following if user not in followers_set})
