@@ -1,5 +1,8 @@
 # instagram-followers-cleaner
-A small Python utility to clean Instagram exported text and detect users who do not follow back.
+A small Python utility to clean Instagram exported text and detect users who do not follow back.  
+This project was built as part of my learning journey while studying Python fundamentals, with a focus on clean code, text processing, and data cleaning.  
+It is intentionally simple and focused on fundamentals.
+It represents an early step in my learning path.
 
 ---
 
